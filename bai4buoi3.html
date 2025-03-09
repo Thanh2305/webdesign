@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <style>
+        body {
+            background-color: #e0f7fa; /* Màu xanh pastel nhẹ */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .main-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 20px;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .sidebar {
+            width: 280px;
+            background-color: #f7f7f7;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .sidebar:hover {
+            transform: translateY(-5px);
+        }
+
+        .content {
+            width: 600px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 3px solid #0288d1;
+        }
+
+        h1 {
+            text-align: center;
+            color: #d32f2f;
+            font-size: 32px;
+        }
+
+        h2, h3 {
+            color: #0288d1;
+        }
+
+        p {
+            font-size: 16px;
+            color: #555;
+        }
+
+        a {
+            color: #0288d1;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+            color: #0277bd;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            font-size: 16px;
+            color: #555;
+        }
+
+        iframe {
+            width: 100%;
+            height: 315px;
+            border: none;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar, .content {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+        <!-- Sidebar Section -->
+        <div class="sidebar">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Yen_Bai_-_dogs_-_P1390010.JPG/300px-Yen_Bai_-_dogs_-_P1390010.JPG" alt="Ảnh đại diện">
+            <h2>Do Duc Thanh</h2>
+            <p>Ngành: CNTT D2024A</p>
+            <p>Điện thoại: 124135135135</p>
+        </div>
+
+        <!-- Content Section -->
+        <div class="content">
+            <h1>Thông Tin Cá Nhân</h1>
+            <p><strong>Họ Tên:</strong> Do Duc Thanh</p>
+            <p><strong>Ngày sinh:</strong> 23/05/1998</p>
+            <p><strong>Địa chỉ:</strong> Hà Nội</p>
+            <p><strong>Email:</strong> thanhsaidepchieu@gmail.com</p>
+            <p><strong>Link fb: </strong><a href="https://www.facebook.com/profile.php?id=100077697064980&locale=vi_VN" target="_blank">Facebook</a></p>
+            
+            <h2>Học Vấn</h2>
+            <p><strong>Trường:</strong> Đại học thủ đô Hà Nội</p>
+            <p><strong>Khoa:</strong> Toán - Công nghệ thông tin</p>
+            
+            <h3>Sở thích</h3>
+            <ul>
+                <li>Thích nghe nhạc, ngủ, chơi game</li>
+                <li>Thích ăn vặt</li>
+                <li>Thích xem phim</li>
+            </ul>
+
+            <p>Nhạc yêu thích:</p>
+            <iframe src="https://www.youtube.com/embed/SmHsIi5gJNc?si=XPmxiBwvU0sqLL--" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
+
+</body>
+</html>
