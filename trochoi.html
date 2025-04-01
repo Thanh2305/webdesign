@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flappy Bird đơn giản</title>
+
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #70c5ce;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        canvas {
+            background-color: #70c5ce;
+            display: block;
+            border: 2px solid #000;
+        }
+        #gameCanvas {
+            background-color: #70c5ce;
+            width: 100%;
+            max-width: 600px;
+            height: 90%;
+        }
+    </style>
+</head>
+<button class="back-btn" onclick="goBack()">←</button>
+
+<script>
+function goBack() {
+    if (window.history.length > 1) {
+        window.history.back();
+    } else {
+        alert("Không có trang trước để quay lại!");
+    }
+}
+</script>
+
+<body>
+    <canvas id="gameCanvas"></canvas>
+    <script>
+        const canvas = document.getElementById("gameCanvas");
+        const ctx = canvas.getContext("2d");
+
+        // Thiết lập kích thước canvas
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // Chim
+        const bird = {
+            x: 50,
+            y: canvas.height / 2,
+            width: 30,
+            height: 30,
+            velocity: 0,
+            gravity: 0.2,  // Giảm trọng lực giúp chim không rơi nhanh
+            lift: -10  // Lực nhảy nhẹ nhàng hơn
+        };
+
+        // Ống
+        const pipes = [];
+        const pipeWidth = 50;
+        const pipeGap = 200;  // Khoảng cách giữa các ống lớn hơn
+        const pipeSpeed = 1.5;  // Giảm tốc độ ống để làm cho trò chơi dễ hơn
+
+        let score = 0;
+        let gameOver = false;
+
+        // Vẽ chim
+        function drawBird() {
+            ctx.fillStyle = "#FF0";  // Màu vàng cho chim
+            ctx.fillRect(bird.x, bird.y, bird.width, bird.height);
+        }
+
+        // Vẽ các ống
+        function drawPipes() {
+            for (let i = 0; i < pipes.length; i++) {
+                const pipe = pipes[i];
+                ctx.fillStyle = "#00FF00";  // Màu xanh cho ống
+                ctx.fillRect(pipe.x, 0, pipeWidth, pipe.topHeight);
+                ctx.fillRect(pipe.x, pipe.bottomY, pipeWidth, canvas.height - pipe.bottomY);
+            }
+        }
+
+        // Tạo ống mới
+        function generatePipes() {
+            const topHeight = Math.floor(Math.random() * (canvas.height - pipeGap));
+            const bottomY = topHeight + pipeGap;
+
+            pipes.push({ x: canvas.width, topHeight: topHeight, bottomY: bottomY });
+        }
+
+        // Di chuyển các ống
+        function movePipes() {
+            for (let i = 0; i < pipes.length; i++) {
+                pipes[i].x -= pipeSpeed;
+                if (pipes[i].x + pipeWidth <= 0) {
+                    pipes.splice(i, 1);
+                    score++;
+                }
+            }
+        }
+
+        // Kiểm tra va chạm
+        function collisionDetection() {
+            for (let i = 0; i < pipes.length; i++) {
+                const pipe = pipes[i];
+
+                if (bird.x + bird.width > pipe.x && bird.x < pipe.x + pipeWidth) {
+                    if (bird.y < pipe.topHeight || bird.y + bird.height > pipe.bottomY) {
+                        gameOver = true;
+                    }
+                }
+            }
+
+            if (bird.y + bird.height > canvas.height || bird.y < 0) {
+                gameOver = true;
+            }
+        }
+
+        // Vẽ điểm số
+        function drawScore() {
+            ctx.fillStyle = "#FFFFFF";
+            ctx.font = "30px Arial";
+            ctx.fillText("Score: " + score, 20, 50);
+        }
+
+        // Làm mới trò chơi (không reset khi nhấn phím)
+        function resetGame() {
+            pipes.length = 0;
+            score = 0;
+            gameOver = false;
+            bird.y = canvas.height / 2;
+            bird.velocity = 0;
+        }
+
+        // Vòng lặp trò chơi
+        function gameLoop() {
+            if (gameOver) {
+                resetGame();  // Không làm reset lại toàn bộ trò chơi mà chỉ đặt lại chim và ống
+            }
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            drawBird();
+            drawPipes();
+            drawScore();
+            movePipes();
+            collisionDetection();
+
+            bird.velocity += bird.gravity;
+            bird.y += bird.velocity;
+
+            requestAnimationFrame(gameLoop);
+        }
+
+        // Điều khiển chim
+        function flap() {
+            bird.velocity = bird.lift;
+        }
+
+        // Nghe sự kiện nhấn phím hoặc chạm màn hình
+        document.addEventListener("keydown", function (e) {
+            if (e.key === " " || e.key === "ArrowUp") {
+                if (!gameOver) {  // Nếu trò chơi chưa kết thúc thì cho phép nhảy
+                    flap();
+                }
+            }
+        });
+
+        // Tạo ống mỗi 2 giây
+        setInterval(generatePipes, 2000);  // Giảm tần suất tạo ống
+
+        // Chạy trò chơi
+        gameLoop();
+    </script>
+</body>
+</html>
