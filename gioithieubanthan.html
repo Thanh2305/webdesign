@@ -1,173 +1,124 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile - Do Duc Thanh</title>
+    <title>Hồ Sơ Cá Nhân</title>
     <style>
-       
-        * {
+        body {
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: #e3f2fd;
-            color: #333;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            height: 100vh;
-            padding-top: 70px;
-        }
-
-        
-        nav {
-            width: 100%;
-            background: #0288d1;
-            position: fixed;
-            top: 0;
-            left: 0;
-            padding: 15px 0;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-        }
-
-        .menu {
-            display: flex;
-            justify-content: center;
-            list-style: none;
-        }
-
-        .menu li {
-            margin: 0 20px;
-        }
-
-        .menu a {
-            text-decoration: none;
-            color: white;
-            font-size: 18px;
-            padding: 10px 15px;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-        }
-
-        .menu a:hover {
-            background: #0277bd;
-        }
-
-        
-        .container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: flex-start;
-            gap: 30px;
-            width: 90%;
-            max-width: 1200px;
-            margin-top: 20px;
-        }
-
-        .sidebar {
-            width: 280px;
-            background: white;
-            padding: 20px;
+            background-color: #E3F2FD;
             text-align: center;
+            color: #333;
+            overflow-x: hidden;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background: white;
+            padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s forwards;
         }
-
-        .sidebar:hover {
-            transform: translateY(-5px);
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-
-        .sidebar img {
+        img {
             width: 150px;
             height: 150px;
             border-radius: 50%;
-            border: 4px solid #0288d1;
+            display: block;
+            margin: 0 auto 20px;
+            border: 5px solid #0288D1;
+            animation: bounceIn 1s ease-in-out;
         }
-
-        .sidebar h2 {
-            margin: 15px 0 5px;
-            color: #0288d1;
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
         }
-
-        .sidebar p {
-            font-size: 16px;
-            color: #555;
+        h1, h2 {
+            transition: color 0.3s ease-in-out;
+            animation: pulse 1.5s infinite;
         }
-
-       
-        .content {
-            width: 600px;
-            padding: 25px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
-
-        h1 {
-            text-align: center;
-            color: #d32f2f;
-            font-size: 28px;
-            margin-bottom: 15px;
+        h1:hover, h2:hover {
+            color: #FF4081;
         }
-
-        h2 {
-            color: #0288d1;
-            margin-top: 15px;
+        .info {
+            margin: 10px 0;
+            font-size: 18px;
+            opacity: 0;
+            animation: fadeInUp 1.5s forwards;
         }
-
-        p {
-            font-size: 16px;
-            color: #444;
-            line-height: 1.6;
+        .info strong {
+            display: inline-block;
+            width: 140px;
+            color: #0288D1;
         }
-
-        a {
-            color: #0288d1;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        a:hover {
-            text-decoration: underline;
-            color: #0277bd;
-        }
-
-        iframe {
-            width: 100%;
-            height: 315px;
-            border: none;
+        .social-links {
             margin-top: 20px;
-            border-radius: 10px;
         }
-
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 768px) {
-            .sidebar, .content {
-                width: 100%;
+        .social-links a {
+            color: white;
+            background: #0288D1;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            margin: 5px;
+            display: inline-block;
+            font-weight: bold;
+            transition: transform 0.3s, background 0.3s;
+            animation: fadeInUp 1.2s forwards;
+        }
+        .social-links a:hover {
+            background: #01579B;
+            transform: scale(1.1) rotate(5deg);
+        }
+        .animated-text {
+            opacity: 0;
+            transform: translateX(-50px);
+            animation: slideIn 1.5s forwards;
+        }
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
             }
-
-            .menu {
-                flex-direction: column;
-                text-align: center;
+            to {
+                opacity: 1;
+                transform: translateX(0);
             }
         }
-
-        
-                }
-
-        .back-button:hover {
-            background: #007c91;
+        .container:hover {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: 0.5s;
         }
     </style>
 </head>
-<button class="back-btn" onclick="goBack()">← Quay lại</button>
+<button class="back-btn" onclick="goBack()">←</button>
 
 <script>
 function goBack() {
@@ -178,62 +129,34 @@ function goBack() {
     }
 }
 </script>
-
-<style>
-.back-btn {
-    background-color: #f1f1f1;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-}
-
-.back-btn:hover {
-    background-color: #d6d6d6;
-}
-</style>
-
 <body>
-
-    
-    <nav>
-        <ul class="menu">
-            <li><a href="gioithieubanthan.html">Trang chủ</a></li>
-            <li><a href="profile.html">Hồ sơ</a></li>
-            <li><a href="index.html">Bài tập</a></li>
-            <li><a href="about.html">Giới thiệu</a></li>
-            
-        </ul>
-    </nav>
-
     <div class="container">
-        <!-- Sidebar -->
-        <div class="sidebar">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Yen_Bai_-_dogs_-_P1390010.JPG/300px-Yen_Bai_-_dogs_-_P1390010.JPG" alt="Ảnh đại diện">
-            <h2>Do Duc Thanh</h2>
-            <p>Ngành: CNTT D2024A</p>
-            <p>Điện thoại: 124135135135</p>
+        <img src="https://scontent.fhan2-4.fna.fbcdn.net/v/t39.30808-6/470464700_613612151238682_2320195301312991169_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=CsOIp3HTo-kQ7kNvgF-tW6_&_nc_oc=AdnDKKFJEv_igPfYSWZG-UF4mf-m4Q-ANMvOIzK3EGwqApDN9apnHd3BroJ3tPezLU4&_nc_zt=23&_nc_ht=scontent.fhan2-4.fna&_nc_gid=OmweETGGsREdZJ7J0kW3bw&oh=00_AYFMPQi4JnAg_eC-yrYgNAp5FmFBTtdkSAg6_lVd8SGGEw&oe=67F215D4" alt="Ảnh đại diện">
+        <h1>ĐỖ ĐỨC THÀNH(Mây)</h1>
+        <h2>Thông tin cá nhân</h2>
+        <div class="info"><strong>Ngày sinh:</strong> 23/5/2006</div>
+        <div class="info"><strong>Địa chỉ:</strong> Hà Nội</div>
+        <div class="info"><strong>Email:</strong> thanh050999@gmail.com</div>
+        <div class="info"><strong>Số điện thoại:</strong> 0966773508</div>
+        
+        <h2>Kinh nghiệm làm việc</h2>
+        <p class="animated-text">dù mới 18 tuổi nhưng đã có 25 năm kinh nghiệm làm sếp</p>
+        
+        <h2>Học vấn</h2>
+        <p class="animated-text">chưa bao giờ bị đúp học</p>
+        
+        <h2>Kỹ năng</h2>
+        <p class="animated-text">nghe nhạc,ăn vặt,chụp ảnh</p>
+        
+        <h2>Bài hát ưa thích</h2>
+        <p class="animated-text"><iframe src="https://www.youtube.com/embed/iLSLEoZKaxI"></iframe></p>
+        <h2>Liên hệ</h2>
+        <div class="social-links">
+            <a href="https://www.facebook.com/profile.php?id=100077697064980&locale=vi_VN">Facebook</a>
+            <a href="https://www.tiktok.com/@dwc.t2305">Tiktok</a>
+            <a href="https://github.com/Thanh2305/webdesign">GitHub</a>
         </div>
-
-        <!-- Nội dung chính -->
-        <div class="content">
-            <h1>Thông Tin Cá Nhân</h1>
-            <p><strong>Họ Tên:</strong> Do Duc Thanh</p>
-            <p><strong>Ngày sinh:</strong> 23/05/1998</p>
-            <p><strong>Địa chỉ:</strong> Hà Nội</p>
-            <p><strong>Email:</strong> thanhsaidepchieu@gmail.com</p>
-            <p><strong>Facebook:</strong> <a href="https://www.facebook.com/profile.php?id=100077697064980" target="_blank">Facebook</a></p>
-
-            <h2>Sinh Viên</h2>
-            <p><strong>Trường:</strong> Đại học thủ đô Hà Nội</p>
-            <p><strong>Khoa:</strong> Toán - Công nghệ thông tin</p>
-
-            <p>Nhạc yêu thích:</p>
-            <iframe src="https://www.youtube.com/embed/iLSLEoZKaxI"></iframe>
-        </div>
+        
     </div>
-
-    </body>
+</body>
 </html>

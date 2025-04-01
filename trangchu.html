@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Chủ</title>
+    <style>
+        /* Cơ bản của trang */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #E3F2FD;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* Thanh điều hướng */
+        .navbar {
+            background-color: #0288D1;
+            padding: 15px 20px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 999;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease-in-out;
+        }
+
+        /* Khi di chuột vào navbar */
+        .navbar:hover {
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar a {
+            color: white;
+            margin: 0 20px;
+            text-decoration: none;
+            font-size: 18px;
+            padding: 12px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease-in-out, transform 0.3s;
+        }
+
+        /* Khi di chuột vào các liên kết trong navbar */
+        .navbar a:hover {
+            background-color: #01579B;
+            transform: scale(1.1);
+        }
+
+        /* Nội dung chính */
+        .content {
+            text-align: center;
+            margin-top: 100px;
+            opacity: 0;
+            animation: fadeIn 1.5s forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .content h1 {
+            color: #0288D1;
+            font-size: 36px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .content h1:hover {
+            transform: translateY(-5px);
+        }
+
+        .content p {
+            font-size: 18px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Hiệu ứng cho các liên kết */
+        .social-links {
+            margin-top: 30px;
+        }
+
+        .social-links a {
+            color: white;
+            background-color: #0288D1;
+            padding: 12px 25px;
+            margin: 10px;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
+        }
+
+        /* Hiệu ứng hover cho các liên kết */
+        .social-links a:hover {
+            background-color: #01579B;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<button class="back-btn" onclick="goBack()">← </button>
+
+<script>
+function goBack() {
+    if (window.history.length > 1) {
+        window.history.back();
+    } else {
+        alert("Không có trang trước để quay lại!");
+    }
+}
+</script>
+<body>
+    <div class="navbar">
+        <a href="trangchu.html">Trang Chủ</a>
+        <a href="gioithieubanthan.html">Giới Thiệu Bản Thân</a>
+        <a href="index.html">Bài tập</a>
+        <a href="trochoi.html">Trò chơi</a>
+
+        
+    </div>
+
+    <div class="content">
+        <h1>Chào mừng bạn đến với trang của tôi!</h1>
+        <p>Xin chào, tôi là Đỗ Đức Thành, hiện tại tôi là sinh viên năm thứ nhất tại trường Đại học TĐ. Tôi sinh ngày 23 tháng 5 năm 2006 và hiện đang sinh sống tại Hà Nội. Với niềm đam mê mãnh liệt trong lĩnh vực công nghệ và thiết kế web, tôi luôn mong muốn khám phá và học hỏi những kiến thức mới để phát triển bản thân. Ngoài việc học, tôi còn yêu thích chơi game, nghe nhạc và chụp ảnh, những sở thích này giúp tôi thư giãn và nâng cao sự sáng tạo trong công việc. Tôi luôn cố gắng cải thiện kỹ năng của mình và mong muốn được tham gia vào những dự án thú vị để học hỏi và đóng góp. Nếu bạn có bất kỳ câu hỏi hay muốn kết nối, đừng ngần ngại liên hệ với tôi.</p>
+
+        <div class="social-links">
+            <a href="https://www.facebook.com/profile.php?id=100077697064980&locale=vi_VN">Facebook</a>
+            <a href="https://www.tiktok.com/@dwc.t2305">Tiktok</a>
+            <a href="https://github.com/Thanh2305/webdesign">GitHub</a>
+        </div>
+    </div>
+</body>
+</html>
