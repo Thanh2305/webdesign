@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flappy Bird</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: url("background.png") no-repeat center center fixed;
+            background-size: cover;
+            overflow: hidden;
+        }
+        canvas {
+            display: block;
+            border: 2px solid black;
+        }
+        .back-btn {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 20px;
+            padding: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="back-btn" onclick="goBack()">←</button>
+    <canvas id="gameCanvas"></canvas>
+
+    <script>
+        function goBack() {
+            if (window.history.length > 1) {
+                window.history.back();
+            } else {
+                alert("Không có trang trước để quay lại!");
+            }
+        }
+
+        const canvas = document.getElementById("gameCanvas");
+        const ctx = canvas.getContext("2d");
+
+        canvas.width = 400;
+        canvas.height = 600;
+
+        // Tải hình ảnh
+        const birdImg = new Image();
+        birdImg.src = "bird.png";
+
+        const pipeTopImg = new Image();
+        pipeTopImg.src = "pipe-top.png";
+
+        const pipeBottomImg = new Image();
+        pipeBottomImg.src = "pipe-bottom.png";
+
+        // Âm thanh
+        const flapSound = new Audio("flap.mp3");
+        const hitSound = new Audio("hit.mp3");
+
+        // Chim
+        const bird = {
+            x: 50,
+            y: canvas.height / 2,
+            width: 34,
+            height: 24,
+            velocity: 0,
+            gravity: 0.2,
+            lift: -5
+        };
+
+        // Ống nước
+        const pipes = [];
+        const pipeWidth = 50;
+        const pipeGap = 200;
+        let pipeSpeed = 1.5;
+
+        let score = 0;
+        let gameOver = false;
+
+        function drawBird() {
+            ctx.drawImage(birdImg, bird.x, bird.y, bird.width, bird.height);
+        }
+
+        function drawPipes() {
+            for (let pipe of pipes) {
+                ctx.drawImage(pipeTopImg, pipe.x, 0, pipeWidth, pipe.topHeight);
+                ctx.drawImage(pipeBottomImg, pipe.x, pipe.bottomY, pipeWidth, canvas.height - pipe.bottomY);
+            }
+        }
+
+        function generatePipes() {
+            const topHeight = Math.floor(Math.random() * (canvas.height - pipeGap - 100)) + 50;
+            const bottomY = topHeight + pipeGap;
+
+            pipes.push({ x: canvas.width, topHeight: topHeight, bottomY: bottomY });
+        }
+
+        function movePipes() {
+            for (let i = 0; i < pipes.length; i++) {
+                pipes[i].x -= pipeSpeed;
+                if (pipes[i].x + pipeWidth <= 0) {
+                    pipes.splice(i, 1);
+                    score++;
+                }
+            }
+        }
+
+        function collisionDetection() {
+            for (let pipe of pipes) {
+                if (bird.x + bird.width > pipe.x && bird.x < pipe.x + pipeWidth) {
+                    if (bird.y < pipe.topHeight || bird.y + bird.height > pipe.bottomY) {
+                        gameOver = true;
+                        hitSound.play();
+                    }
+                }
+            }
+
+            if (bird.y + bird.height >= canvas.height || bird.y <= 0) {
+                gameOver = true;
+                hitSound.play();
+            }
+        }
+
+        function drawScore() {
+            ctx.fillStyle = "#FFFFFF";
+            ctx.font = "30px Arial";
+            ctx.fillText("Score: " + score, 20, 50);
+        }
+
+        function showGameOver() {
+            ctx.fillStyle = "red";
+            ctx.font = "40px Arial";
+            ctx.fillText("Game Over!", canvas.width / 2 - 100, canvas.height / 2);
+        }
+
+        function resetGame() {
+            pipes.length = 0;
+            score = 0;
+            gameOver = false;
+            bird.y = canvas.height / 2;
+            bird.velocity = 0;
+        }
+
+        function gameLoop() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            drawBird();
+            drawPipes();
+            drawScore();
+            movePipes();
+            collisionDetection();
+
+            bird.velocity += bird.gravity;
+            bird.y += bird.velocity;
+
+            if (gameOver) {
+                showGameOver();
+                setTimeout(() => resetGame(), 2000);
+                return;
+            }
+
+            requestAnimationFrame(gameLoop);
+        }
+
+        function flap() {
+            bird.velocity = bird.lift;
+            flapSound.play();
+        }
+
+        document.addEventListener("keydown", function (e) {
+            if (e.key === " " || e.key === "ArrowUp") {
+                if (!gameOver) {
+                    flap();
+                }
+            }
+        });
+
+        setInterval(generatePipes, 2000);
+
+        gameLoop();
+    </script>
+</body>
+</html>
