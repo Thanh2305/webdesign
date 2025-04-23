@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<button class="back-btn" onclick="goBack()">← Quay lại</button>
+
+<script>
+function goBack() {
+    if (window.history.length > 1) {
+        window.history.back();
+    } else {
+        alert("Không có trang trước để quay lại!");
+    }
+}
+</script>
+
+<body>
+
+<h1>Đức Thành là người đẹp trai </h1>
+<h2>không thể chối cãi</h2>
+
+<p>mất phí để biết</p>
+
+<button id="myBtn">Donate 500k</button>
+
+<p id="demo"></p>
+
+<script>
+const element = document.getElementById("myBtn");
+element.addEventListener("click", myFunction1);
+element.addEventListener("click", myFunction2);
+
+function myFunction1() {
+  document.getElementById("demo").innerHTML += "Cảnh gì đòi thắng!!!!! "
+}
+
+function myFunction2() {
+  document.getElementById("demo").innerHTML += " Nhờn à ?"
+}
+</script>
+
+</body>
+</html>
